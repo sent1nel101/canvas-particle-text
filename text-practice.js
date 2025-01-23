@@ -17,7 +17,7 @@ class Particle {
     this.color = color
     this.originY = y
     this.originX = x
-    this.size = this.effect.gap - 1
+    this.size = this.effect.gap
     this.dx = 0
     this.dy = 0
     this.vx = 0
@@ -71,7 +71,7 @@ class Effect {
     this.particles = []
     this.gap = 2
     this.mouse = {
-      radius: 20000,
+      radius: 5000,
       x: 0,
       y: 0,
     }
@@ -82,17 +82,22 @@ class Effect {
   }
   wrapText(text) {
     this.context.font = "50px Helvetica"
-    const gradient = this.context.createLinearGradient(0, 0, canvas.width, canvas.height)
-    gradient.addColorStop(0.3, "purple")
-    gradient.addColorStop(0.5, "red")
-    gradient.addColorStop(0.7, "blue")
+    const gradient = this.context.createLinearGradient(
+      0,
+      0,
+      canvas.width,
+      canvas.height
+    )
+    gradient.addColorStop(0.1, "#4C4A59")
+    gradient.addColorStop(0.5, "#0897B4")
+    gradient.addColorStop(0.7, "#4CABA6")
     this.context.fillStyle = gradient
     this.context.textBaseline = "middle"
     this.context.textAlign = "center"
-    this.context.font = this.fontSize + "px Bangers"
+    this.context.font = this.fontSize + "px Oleo Script"
     this.context.lineWidth = 3
-    this.context.letterSpacing = "3px"
-    this.context.strokeStyle = "white"
+    // this.context.letterSpacing = "3px"
+    this.context.strokeStyle = "goldenrod"
     // break into multiple rows
     let linesArray = []
     let lineCounter = 0
@@ -112,14 +117,27 @@ class Effect {
     let textHeight = lineCounter * this.lineHeight
     this.textY = canvas.height / 2 - textHeight / 2
     linesArray.forEach((line, index) => {
-      this.context.fillText(line, this.textX, this.textY + index * this.lineHeight)
-      this.context.strokeText(line, this.textX, this.textY + index * this.lineHeight)
+      this.context.fillText(
+        line,
+        this.textX,
+        this.textY + index * this.lineHeight
+      )
+      this.context.strokeText(
+        line,
+        this.textX,
+        this.textY + index * this.lineHeight
+      )
     })
     this.convertToParticles()
   }
   convertToParticles() {
     this.particles = []
-    const pixels = this.context.getImageData(0, 0, canvas.width, canvas.height).data
+    const pixels = this.context.getImageData(
+      0,
+      0,
+      canvas.width,
+      canvas.height
+    ).data
     this.context.clearRect(0, 0, this.canvasWidth, this.canvasHeight)
     for (let y = 0; y < this.canvasHeight; y += this.gap) {
       for (let x = 0; x < canvas.width; x += this.gap) {
