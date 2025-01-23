@@ -1,0 +1,35 @@
+*,
+:root,
+:before,
+:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Shadows Into Light", serif;
+  font-weight: 400;
+  font-style: normal;
+  overflow: hidden;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  align-content: center;
+  background-color: #000;
+  position: relative;
+}
+
+canvas {
+  /* border: 2px dotted goldenrod; */
+}
+
+input {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 2rem;
+  padding: 15px 30px;
+  border-radius: 15px;
+  text-align: center;
+}
